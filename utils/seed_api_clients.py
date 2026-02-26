@@ -142,6 +142,20 @@ def main() -> None:
             "company": "Empresa Demo SpA",
             "address": None,
         },
+        {
+            "client_id": "cliente_03",
+            "first_name": "Pia",
+            "last_name": "Alvarez",
+            "user_type": "manager",
+            "email": "pia@takhion.com",
+            "company": "Takhion",
+            "address": {
+                "line1": "Avenida Francisco Bilbao 123",
+                "city": "Santiago",
+                "region": "RM",
+                "country": "CL",
+            },
+        },
     ]
 
     created_keys: List[Tuple[str, str]] = []
@@ -179,7 +193,7 @@ def main() -> None:
         print(f"DB: {os.getenv('DB_NAME', 'clientRecommender')} | Collection: {coll.name}")
 
         if created_keys:
-            print("\n🔐 API keys generadas (MOSTRAR SOLO UNA VEZ):")
+            print("API keys generadas (MOSTRAR SOLO UNA VEZ):")
             for cid, key in created_keys:
                 print(f" - {cid}: {key}")
         else:
