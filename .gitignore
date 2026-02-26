@@ -1,0 +1,58 @@
+# -----------------------
+# Python
+# -----------------------
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+coverage.xml
+.coverage
+htmlcov/
+
+# -----------------------
+# Envs
+# -----------------------
+.venv/
+venv/
+env/
+ENV/
+*.envrc
+
+# -----------------------
+# OS / Editor
+# -----------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# -----------------------
+# Secrets / Config
+# -----------------------
+.env
+.env.*
+!.env.example
+
+# -----------------------
+# Logs / Runtime
+# -----------------------
+*.log
+logs/
+
+# -----------------------
+# Project artifacts
+# -----------------------
+results/
+tmp/
+tmp_*/
+*.sqlite
+*.db
