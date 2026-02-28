@@ -130,34 +130,60 @@ def commit_usage(
     to = int(tokens_out)
     total = ti + to
 
+    # monthly_doc = db.usage_monthly.find_one_and_update(
+    #     {"_id": _id},
+    #     {
+    #         "$setOnInsert": {
+    #             "_id": _id,
+    #             "client_id": client_id,
+    #             "period": period,
+    #             "plan": plan,
+    #             "monthly_limit_tokens": int(limit_tokens),
+    #             "tokens_in": 0,
+    #             "tokens_out": 0,
+    #             "tokens_total": 0,
+    #             "requests": 0,
+    #             "created_at": now,
+    #         },
+    #         "$inc": {
+    #             "tokens_in": ti,
+    #             "tokens_out": to,
+    #             "tokens_total": total,
+    #             "requests": 1,
+    #         },
+    #         "$set": {
+    #             "last_request_at": now,
+    #             "updated_at": now,
+    #         },
+    #     },
+    #     upsert=True,
+    #     return_document=ReturnDocument.AFTER,
+    # )
+    
     monthly_doc = db.usage_monthly.find_one_and_update(
-        {"_id": _id},
-        {
-            "$setOnInsert": {
-                "_id": _id,
-                "client_id": client_id,
-                "period": period,
-                "plan": plan,
-                "monthly_limit_tokens": int(limit_tokens),
-                "tokens_in": 0,
-                "tokens_out": 0,
-                "tokens_total": 0,
-                "requests": 0,
-                "created_at": now,
-            },
-            "$inc": {
-                "tokens_in": ti,
-                "tokens_out": to,
-                "tokens_total": total,
-                "requests": 1,
-            },
-            "$set": {
-                "last_request_at": now,
-                "updated_at": now,
-            },
+    {"_id": _id},
+    {
+        "$setOnInsert": {
+            "_id": _id,
+            "client_id": client_id,
+            "period": period,
+            "plan": plan,
+            "monthly_limit_tokens": int(limit_tokens),
+            "created_at": now,
         },
-        upsert=True,
-        return_document=ReturnDocument.AFTER,
+        "$inc": {
+            "tokens_in": ti,
+            "tokens_out": to,
+            "tokens_total": total,
+            "requests": 1,
+        },
+        "$set": {
+            "last_request_at": now,
+            "updated_at": now,
+        },
+    },
+    upsert=True,
+    return_document=ReturnDocument.AFTER,
     )
 
     # Per-request log (recommended)
